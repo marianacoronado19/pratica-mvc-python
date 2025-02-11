@@ -66,8 +66,8 @@ class Database:
             return None
         
 #Área 51
-db = Database() # Instanciamento
-db.conectar()
+# db = Database() # Instanciamento
+# db.conectar()
 # db.executar('insert into tarefa (titulo) values ("Teste de tarefa")')
-print(db.consultar('select * from tarefa'))
-db.desconectar()
+# print(db.consultar('select * from tarefa'))
+# db.desconectar()

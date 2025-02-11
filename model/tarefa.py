@@ -1,4 +1,4 @@
-from model.database import Database
+from database import Database
 
 class Tarefa:
     def __init__(self, id, titulo, data_conclusao):
@@ -25,4 +25,17 @@ class Tarefa:
         tarefas = db.consultar(sql)
         db.desconectar()
         return tarefas if tarefas else [] # Se tarefas for None, retorna uma lista vazia -> moderna, só funciona em Python
-        
+    
+    def apagarTarefa(self):
+        """Apaga uma tarefa cadastrada no banco de dados."""
+        db = Database()
+        db.conectar()
+
+        sql = 'DELETE FROM tarefa WHERE id = %s'
+        params = (self.id,) # Precisa passar como tupla? SIM!
+        db.executar(sql, params)
+        db.desconectar()
+
+# Área 51
+tarefa = Tarefa(4, 'Teste de tarefa', None)
+tarefa. apagarTarefa()
