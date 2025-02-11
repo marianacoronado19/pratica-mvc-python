@@ -52,7 +52,7 @@ class Database:
             print(f'Erro de execução: {e}')
             return None
         
-    def consultar(self, sql, params = None): # variável parametros existe para que as pessoas não façam destruam a dayabase
+    def consultar(self, sql, params = None): # variável parametros existe para que as pessoas não façam destruam a database
         """Executa uma instrução no banco de dados"""
         if self.connection is None and self.cursor is None:
             print('Conexão ao banco de dados não estabelecida!')
@@ -66,7 +66,7 @@ class Database:
             return None
         
 #Área 51
-db = Database()
+db = Database() # Instanciamento
 db.conectar()
 # db.executar('insert into tarefa (titulo) values ("Teste de tarefa")')
 print(db.consultar('select * from tarefa'))
