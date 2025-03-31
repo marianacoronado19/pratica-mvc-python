@@ -10,14 +10,14 @@ class Database:
         self.username = getenv('DB_USER')
         self.password = getenv('DB_PSWD')
         self.database = getenv('DB_NAME')
-        self.connection = None # Inicialização da conexão -> variavel connection existe, mas não tem nada ainda
-        self.cursor = None # Inicialização do cursor
+        self.connection = None # Inicialização da conexão -> variavel connection existe, mas não tem nada ainda. Conexão é uma ponte entre o programa e o banco de dados
+        self.cursor = None # Inicialização do cursor. É o mensageiro entre o programa e o banco de dados. Ele é quem executa as instruções SQL
 
     def conectar(self):
         """Estabelece uma conexão com o banco de dados."""
         try:
             self.connection = mc.connect( # conecta a variavel da classe com o método do MYSQL.connector
-                host = self.host,
+                host = self.host, # self = atributo do objeto. Faz com que o objeto execute algo com ele mesmo
                 database = self.database,
                 user = self.username,
                 password = self.password
@@ -52,7 +52,7 @@ class Database:
             print(f'Erro de execução: {e}')
             return None
         
-    def consultar(self, sql, params = None): # variável parametros existe para que as pessoas não façam destruam a database
+    def consultar(self, sql, params = None): # variável parametros existe para que as pessoas não façam destruam a database -> proteção de MySQL Injection
         """Executa uma instrução no banco de dados"""
         if self.connection is None and self.cursor is None:
             print('Conexão ao banco de dados não estabelecida!')
@@ -64,10 +64,3 @@ class Database:
         except Error as e:
             print(f'Erro de execução: {e}')
             return None
-        
-#Área 51
-# db = Database() # Instanciamento
-# db.conectar()
-# db.executar('insert into tarefa (titulo) values ("Teste de tarefa")')
-# print(db.consultar('select * from tarefa'))
-# db.desconectar()
