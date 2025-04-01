@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="POST"> <!--método para criar registros no banco de dados-->
-        <input type="text" name="titulo" id="titulo" placeholder="Título da tarefa" required>
-        <input type="date" name="data_conclusao" id="data_conclusao">
-        <button type="submit">{{'Atualizar' if editando else 'Adicionar'}}</button>
-    </form>
+    <div id="form">
+        <form method="POST"> <!--método para criar registros no banco de dados-->
+            <input type="text" name="titulo" id="titulo" placeholder="Título da tarefa" required>
+            <input type="date" name="data_conclusao" id="data_conclusao" placeholder="Data de conclusão">
+            <button type="submit">Adicionar</button>
+        </form>
+    </div>
 
     <ul> <!--ordem dos elementos não importa-->
         {% for tarefa in tarefas %}
             <li>
                 {{ tarefa.titulo }} - {{ tarefa.data_conclusao }}
-                <a href="{{ url_for('delete', idTarefa=tarefa.id) }}">Apagar</a>
-                <a href="{{ url_for('edit', idTarefa=tarefa.id) }}">Atualizar</a>
+                    <a href="{{ url_for('delete', idTarefa=tarefa.id) }}">Apagar</a>
+                    <a href="{{ url_for('edit', idTarefa=tarefa.id) }}">Atualizar</a>
             </li>
         {% endfor %}
     </ul>

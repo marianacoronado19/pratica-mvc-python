@@ -40,23 +40,22 @@ class Tarefa:
         db.desconectar()
 
     @staticmethod
-    def buscarTarefaPorId(idTarefa):
+    def buscarTarefa(idTarefa):
         """Busca uma tarefa pelo ID no banco de dados."""
         db = Database()
         db.conectar()
-        sql = 'SELECT * FROM tarefa WHERE id = %s'
+        sql = 'SELECT id, titulo, data_conclusao FROM tarefa WHERE id = %s'
         params = (idTarefa,)
         resultado = db.consultar(sql, params)
         db.desconectar()
-        if resultado:
-            return {'id': resultado[0][0], 'titulo': resultado[0][1], 'data_conclusao': resultado[0][2]}
-        return None
-    
-    def editarTarefaPorId(self, idTarefa):
-        """Edita uma tarefa no banco de dados."""
+        return resultado if resultado else None
+
+    def editarTarefa(idTarefa, titulo, data_conclusao):
+        """Editar uma tarefa cadastrada no banco de dados."""
         db = Database()
         db.conectar()
+
         sql = 'UPDATE tarefa SET titulo = %s, data_conclusao = %s WHERE id = %s'
-        params = (self.titulo, self.data_conclusao, idTarefa)
+        params = (titulo, data_conclusao, idTarefa) # Precisa passar como tupla? SIM! -> espera 1 ou mais valores
         db.executar(sql, params)
         db.desconectar()

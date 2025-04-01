@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="POST"> <!--método para criar registros no banco de dados-->
+        <input type="text" name="titulo" id="titulo" placeholder="Título da tarefa" value="{{ tarefa[titulo] }}" required>
+        <input type="date" name="data_conclusao" id="data_conclusao" value="{{ tarefa[data_conclusao] }}">
+        <button type="submit">Atualizar</button>
+    </form>
+
+{% endblock %}

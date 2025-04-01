@@ -53,11 +53,10 @@ class Database:
             return None
         
     def consultar(self, sql, params = None): # variável parametros existe para que as pessoas não façam destruam a database -> proteção de MySQL Injection
-        """Executa uma instrução no banco de dados"""
+        """Executa uma consulta no banco de dados"""
         if self.connection is None and self.cursor is None:
             print('Conexão ao banco de dados não estabelecida!')
             return None
-        
         try:
             self.cursor.execute(sql, params)
             return self.cursor.fetchall()
